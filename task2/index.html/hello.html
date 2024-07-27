@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .header-content {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .header-content h2 {
+            font-size: 1.5em;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        section {
+            margin-bottom: 40px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            margin-top: 0;
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #about .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        #about img {
+            max-width: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        #skills ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        #skills li {
+            background: #e0e0e0;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        #projects .project {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #projects img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        #resume a {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            background: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        #contact p {
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        #contact a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .proficiency {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .proficiency .bar {
+            width: 80%;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .proficiency .bar span {
+            display: block;
+            height: 100%;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .proficiency .bar.frontend span {
+            width: 70%;
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+        }
+
+        .proficiency .bar.backend span {
+            width: 65%;
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+        }
+
+        .proficiency .bar.languages span {
+            width: 80%;
+            background: linear-gradient(45deg, #42e695, #3bb2b8);
+        }
+
+        .achievement {
+            text-align: center;
+            flex: 1;
+            margin: 10px;
+        }
+
+        .achievement img {
+            max-width: 150px;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        #achievements .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icons li {
+            margin: 0 10px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .social-icons img {
+            width: 32px; 
+            height: 32px; 
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 50%; 
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <h1>SADHWIKA</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#what-i-do">What I Do</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#resume">Resume</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="header-content">
+            <h2>Passionate Developer | Crafting Innovative and User-Centric Solutions</h2>
+        </div>
+    </header>
+
+    <main>
+        <section id="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <img src="/asset/profile.png" alt="Nandhini">
+                    <p>Hello! I'm Sadhwika, a dedicated developer with a passion for creating innovative and user-centric solutions. With a background in [mention any relevant experience or education], I specialize in frontend and backend development, bringing ideas to life through clean, efficient code and intuitive design. Whether it's crafting responsive websites, building robust applications, or integrating seamless user experiences, I thrive on tackling challenges and delivering results that exceed expectations. Let's collaborate and turn your ideas into reality!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-i-do">
+            <div class="container">
+                <h2>What I Do</h2>
+                <p>I specialize in creating beautiful, responsive websites and applications that provide an optimal user experience. My expertise includes:</p>
+                <ul>
+                    <li>Frontend Development: Crafting visually appealing and interactive user interfaces.</li>
+                    <li>Backend Development: Building robust and scalable server-side logic.</li>
+                    <li>Full Stack Development: Integrating both frontend and backend technologies.</li>
+                    <li>Programming Languages: Proficiency in various programming languages for versatile development.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2>Skills</h2>
+                <div class="proficiency">
+                    <div class="bar frontend">
+                        <h3>Frontend Development</h3>
+                        <span></span>
+                    </div>
+                    <div class="bar languages">
+                        <h3>Programming Languages</h3>
+                        <span></span>
+                    </div>
+                    <div class="bar frontend">
+                        <h3>Frontend Development</h3>
+                        <span></span>
+                    </div>
+                    <div class="bar frontend">
+                        <h3>Frontend Development</h3>
+                        <span></span>
+                    </div>
+
+                    <div class="bar backend">
+                        <h3>Backend Development</h3>
+                        <span></span>
+                    </div>
+
+                    <div class="bar languages">
+                        <h3>Programming Languages</h3>
+                        <span></span>
+                    </div>
+                </div>
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>React</li>
+                    <li>Node.js</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="project">
+                    <h3>Project 1: Weather App</h3>
+                    <img src="/asset/proj1/proj1.png" alt="Project 1 Image">
+                    <p>A responsive web application that provides real-time weather information for any location. Users can search for cities to get current weather conditions, including temperature, humidity, and wind speed. The app uses the OpenWeatherMap API for fetching weather data</p>
+                </div>
+                <div class="project">
+                    <h3>Project 2: E-commerce Website</h3>
+                    <img src="/asset/proj2.jpeg" alt="Project 2 Image">
+                    <p>A fully functional e-commerce website built with React and Node.js. It includes features like product listings, a shopping cart, user authentication, and payment processing with Stripe. The backend is powered by Express.js and MongoDB.</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="achievements">
+            <div class="container">
+                <h2>Achievements and Certificates</h2>
+                <div class="achievement">
+                    <h3>COURSE COMPLETION CERTIFICATION</h3>
+                    <img src="/asset/cs.png" alt="Achievement 1">
+                    <p><a href="/asset/2174Coursera QYMQR5Z822ZG.pdf" target="_blank">View Certification</a></p>
+                </div>
+                <div class="achievement">
+                    <h3>OFFER LETTER FROM CODSOFT</h3>
+                    <img src="/asset/cod.avif" alt="Achievement 2">
+                    <p><a href="/asset/Yadla Sadhwika .pdf" target="_blank">View OFFER Letter</a></p>
+                </div>
+                <div class="achievement">
+                    <h3>Profile on INTERNSHALA</h3>
+                    <img src="/asset/is.png" alt="Achievement 3">
+                    <p><a href="https://internshala.com/" target="_blank">View Profile</a></p>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="resume">
+            <div class="container">
+                <h2>Resume</h2>
+                <a href="/asset/res.pdf" download>Download My Resume</a>
+            </div>
+        </section>
+
+        <section id="hire-me">
+            <div class="container">
+                <h2>Hire Me</h2>
+                <p>Interested in collaborating or hiring me for your project? Send me a message!</p>
+                <form action="mailto:yadl22168.cs@rmkec.ac.in" method="post" enctype="text/plain">
+                    <textarea name="message" rows="4" placeholder="Type your message here..."></textarea>
+                    <div class="contact-options">
+                        <button type="submit">Send Email</button>
+                        <a href="https://www.linkedin.com/in/yadla-sadhwika-undefined-a91970262?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BrNH1ttOoTcehGr0tNbVloQ%3D%3D" target="_blank">Connect on LinkedIn</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+
+        <section id="contact">
+            <div class="container">
+                <h2>Contact</h2>
+                <p>Email: <a href="mailto:yadl22168.cs@rmkec.ac.in">yadl22168.cs@rmkec.ac.in</a></p>
+                <p>Phone: <a href="tel:+919998887776">+91 9998887776</a></p>
+            </div>
+        </section>
+
+        <section id="reach-out">
+            <div class="container">
+                <h2>Reach Out to Me</h2>
+                <ul class="social-icons">
+                    <li><a href="https://www.linkedin.com/in/yadla-sadhwika-undefined-a91970262?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BrNH1ttOoTcehGr0tNbVloQ%3D%3D" target="_blank"><img src="/asset/lk.png" alt="LinkedIn"></a></li>
+                    <li><a href="https://github.com/sadhwika21305" target="_blank"><img src="/asset/ghb.webp" alt="GitHub"></a></li>
+                    <li><a href="https://x.com/SadhwikaRe45804" target="_blank"><img src="/asset/icons8-twitter.svg" alt="Twitter"></a></li>
+                </ul>
+            </div>
+        </section>
+        
+        
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Open for opportunities</p>
+            <p>&copy; 2024 SADHWIKA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Popup Welcome Message Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Welcome to my portfolio! Explore and connect with me.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript to show the modal on page load -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var modal = document.getElementById("myModal");
+            var span = document.getElementsByClassName("close")[0];
+
+            // Show the modal
+            modal.style.display = "block";
+
+            // Close the modal when close button or outside modal is clicked
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
